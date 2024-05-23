@@ -13,7 +13,9 @@ func main() {
 		AddItem("Thing 1", "The first thing", 'a', func() {
 			showTextWindow(app, list, "This text will be displayed in the new window.")
 		}).
-		AddItem("Thing 2", "The second thing", 'b', nil).
+		AddItem("Thing 2", "The second thing", 'b', func() {
+			showInputWindow(app, list, 1)
+		}).
 		AddItem("Quit", "Press to exit", 'q', func() {
 			app.Stop()
 		})
@@ -34,4 +36,25 @@ func showTextWindow(app *tview.Application, list *tview.List, text string) {
 		})
 
 	app.SetRoot(modal, true)
+}
+
+func showInputWindow(app *tview.Application, list *tview.List, index int) {
+	inputField := tview.NewInputField().
+		SetLabel("Enter new description: ").
+		SetFieldWidth(30)
+
+	form := tview.NewForm().
+		AddFormItem(inputField).
+		AddButton("Submit", func() {
+			newText := inputField.GetText()
+			list.SetItemText(index, "Thing 2", newText)
+			app.SetRoot(list, true)
+		}).
+		AddButton("Cancel", func() {
+			app.SetRoot(list, true)
+		})
+
+	form.SetBorder(true).SetTitle("Input Form").SetTitleAlign(tview.AlignCenter)
+
+	app.SetRoot(form, true)
 }
