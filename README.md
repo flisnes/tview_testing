@@ -1,6 +1,6 @@
 # Tview Demo
 
-This is a simple Golang familiarize myself with the use of the [Tview](https://github.com/rivo/tview) module to create a terminal-based user interface (UI).
+This is a simple Golang project to familiarize myself with the use of the [Tview](https://github.com/rivo/tview) module to create a terminal-based user interface (UI).
 
 ## Prerequisites
 
